@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_11_24_134344) do
 
   create_table "users", force: :cascade do |t|
     t.string "public_id"
-    t.string "password"
+    t.string "password_digest"
     t.string "picture_thumbnail"
     t.string "video_url"
     t.string "json_response"
