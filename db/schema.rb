@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_134344) do
+ActiveRecord::Schema.define(version: 2020_11_24_163554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,12 +26,13 @@ ActiveRecord::Schema.define(version: 2020_11_24_134344) do
 
   create_table "users", force: :cascade do |t|
     t.string "public_id"
-    t.string "password"
+    t.string "password_digest"
     t.string "picture_thumbnail"
     t.string "video_url"
     t.string "json_response"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "name", null: false
   end
 
   add_foreign_key "searches", "users"

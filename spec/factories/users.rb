@@ -1,9 +1,10 @@
 FactoryBot.define do
   factory :user do
-    public_id { "MyString" }
-    password { "MyString" }
-    picture_thumbnail { "MyString" }
-    video_url { "MyString" }
-    json_response { "MyString" }
+    name { 'Carlos' }
+    public_id { "myuser" }
+    password { "12345" }
+    picture_thumbnail { "url://" }
+    video_url { "url://" }
+    json_response { '{}' }
   end
 end
