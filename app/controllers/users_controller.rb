@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     
     def login
     
-        if current_user 
+        if valid_login_user 
             response = {user_id: @user.id}
         else
             response = {message: 'Invalid credentials'}
@@ -12,23 +12,36 @@ class UsersController < ApplicationController
         
     end
 
+    #POST /signup
+    def create
+        p user_params
+        user = User.new(user_params)
+
+        user.save
+        if user.valid?
+            response = {user_id: user.id}
+        else
+            response = {message: 'Signup error', error: user.errors.messages}
+        end
+        json_response(response)
+    end
+
 
     private
 
     def user_params
         params.permit(
           :public_id,
-          :password
+          :password,
+          :password_confirmation,
+          :picture_thumbnail,
+          :name
         )
     end
 
-    def current_user
+    def valid_login_user
         @user = User.find_by(public_id: params[:public_id])
-        p user_params
-        p @user
-        p params[:password]
         if  @user && @user.authenticate(params[:password])
-            puts "THIS IS TRUE!"
             return true
         else
             return false

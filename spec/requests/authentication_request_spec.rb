@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Authentications", type: :request do
 
+    #login action testing
     describe 'POST /auth/login' do
         let!(:user) {create(:user)}
         let!(:user_id) {user.id}
