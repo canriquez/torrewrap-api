@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
+  before_action :none_existing_only, only: :create
+
   def login
     if valid_login_user
-      json_response({ user_id: @user.id })
+      json_response({ user_id: @user.id, user: @user })
     else
       json_response({ message: 'Invalid credentials' })
     end
@@ -10,13 +12,23 @@ class UsersController < ApplicationController
   # POST /signup
   def create
     p user_params
-    user = User.new(user_params)
 
-    user.save
-    if user.valid?
-      json_response({ user_id: user.id })
+    @torreco = Torreco::Search.by_public_id(user_params[:public_id])
+    p JSON.parse(@torreco.body)
+
+    if JSON.parse(@torreco.body)["message"] == 'Person not found!'
+      json_response({ message: JSON.parse(@torreco.body)["message"]+' in Torre.co. Please use a valid username.'})
     else
-      json_response({ message: 'Signup error', error: user.errors.messages })
+      user = User.new(user_params)
+      user.picture_thumbnail = JSON.parse(@torreco.body)["person"]["pictureThumbnail"]
+      user.name = JSON.parse(@torreco.body)["person"]["name"]
+      user.json_response = JSON.parse(@torreco.body)["person"]
+      user.save
+      if user.valid?
+        json_response({ user_id: user.id, wrapApi: user })
+      else
+        json_response({ message: 'Signup error', error: user.errors.messages })
+      end
     end
   end
 
@@ -31,6 +43,14 @@ class UsersController < ApplicationController
       :name
     )
   end
+
+  def none_existing_only
+    @user = User.find_by(public_id: params[:public_id])
+    return if !@user
+    json_response(error: 'User already exists torreWrap. Please login instead.')
+  end
+
+
 
   def valid_login_user
     @user = User.find_by(public_id: params[:public_id])
