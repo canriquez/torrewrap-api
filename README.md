@@ -6,9 +6,9 @@ This API serves as a backend for the full-stack take-home project, 'torreWrap'. 
 
 ### Full stack application concept
 
-When the user enters the Torre.co username, the app will check the username validity using the torreWrap-API end point. The torreWrap-API will hit the Torre.co API to fech the required user information. If this operation fails, then the front end will not progress until a valid user is submitted. After a valid user is provided (canriquez), the app will profide the form to enter the password. A valid TorreWrap-API password must be provided.
+When the user enters the Torre.co username, the app will check the username validity using the torreWrap-API endpoint. The torreWrap-API will hit the Torre.co API to fech the required user information. If this operation fails, then the front end will not progress until a valid user is submitted. After a right user is provided (canriquez), the app will give the form to enter the password. A valid TorreWrap-API password must be provided.
 
-This API, serves as pass through to consume Torre.co enpoints. Also this API provides a model to store the search-keys for the users while consuming the Torre.co APIs for jobs and persons.
+This API, serves as pass through to consume Torre.co endpoints. Also, this API provides a model to store the search-keys for the users while consuming the Torre.co APIs for jobs and persons.
 
 ### Live demo @Heroku
 
@@ -22,7 +22,7 @@ This API, serves as pass through to consume Torre.co enpoints. Also this API pro
 
 ## Authentication: Access to resources
 
-Due to time constrains, uses no method for ensuring session persistance in a reliable manner. When the provides the right login credentials, the API will send a json object including the user_id in the database. This user Id, is then stored in the front end's local storage, and will be send back to the API for additional requests as a way of request authentications.
+Due to time constraints, uses no method for reliably ensuring session persistence. When the user provides the right login credentials, the API will send a JSON object, including the user_id in the database. This user Id, is then stored in the front end's local storage and will be sent back to the API for additional requests to request authentications.
 
 # API Endpoints
 
