@@ -7,8 +7,14 @@ class AuthenticationController < ApplicationController
         else
           json_response({ message: 'Valid Torre.co User'})
         end
-
-
     end
     
+    def valid_wrap_user_check
+        @user = User.find_by(public_id: params[:id])
+        if !@user
+          json_response({ error: 'Invalid TowerWrap User'})
+        else
+          json_response({ message: 'Valid TorreWrap User'})
+        end
+    end
 end

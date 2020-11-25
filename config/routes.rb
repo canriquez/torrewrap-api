@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post 'signup', to: 'users#create'
 
   get 'auth/person/:id', to: 'authentication#person_check'
+  get 'auth/warapuser/:id', to: 'authentication#valid_wrap_user_check'
 end
