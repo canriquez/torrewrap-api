@@ -27,4 +27,28 @@ RSpec.describe 'Authentications', type: :request do
       end
     end
   end
+
+  #get vaildates Torre.co public_id existance
+
+  describe 'GET /auth/person/:id' do
+    let (:user) {'canriquez'}
+    context 'When request is valid' do
+      before { get "/auth/person/#{user}" }
+
+      it 'returns confirmation' do
+        p json
+        expect(json['message']).to eq('Valid Torre.co User')
+      end
+    end
+
+    context 'When request is invalid valid' do
+      let (:user) {'hohohohohoh'}
+      before { get "/auth/person/#{user}" }
+
+      it 'returns error' do
+        p json
+        expect(json['error']).to eq('Invalid Torre.co User')
+      end
+    end
+  end
 end

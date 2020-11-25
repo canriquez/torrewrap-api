@@ -3,7 +3,15 @@ class UsersController < ApplicationController
 
   def login
     if valid_login_user
-      json_response({ user_id: @user.id, user: @user })
+      json_response({ 
+        user_id: @user.id, 
+        user_name: @user.name, 
+        picture_thumbnail: @user.picture_thumbnail,
+        public_id: @user.public_id,
+        torre_data: @user.json_response,
+        created_at: @user.created_at,
+        updated_at: @user.updated_at
+        })
     else
       json_response({ message: 'Invalid credentials' })
     end
@@ -25,7 +33,15 @@ class UsersController < ApplicationController
       user.json_response = JSON.parse(@torreco.body)["person"]
       user.save
       if user.valid?
-        json_response({ user_id: user.id, wrapApi: user })
+        json_response({ 
+          user_id: user.id, 
+          user_name: user.name, 
+          picture_thumbnail: user.picture_thumbnail,
+          public_id: user.public_id,
+          torre_data: user.json_response,
+          created_at: user.created_at,
+          updated_at: user.updated_at
+          })
       else
         json_response({ message: 'Signup error', error: user.errors.messages })
       end
