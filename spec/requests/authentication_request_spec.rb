@@ -28,10 +28,10 @@ RSpec.describe 'Authentications', type: :request do
     end
   end
 
-  #get vaildates Torre.co public_id existance
+  # get vaildates Torre.co public_id existance
 
   describe 'GET /auth/person/:id' do
-    let (:user) {'canriquez'}
+    let(:user) { 'canriquez' }
     context 'When request is valid' do
       before { get "/auth/person/#{user}" }
 
@@ -42,7 +42,7 @@ RSpec.describe 'Authentications', type: :request do
     end
 
     context 'When request is invalid valid' do
-      let (:user) {'hohohohohoh'}
+      let(:user) { 'hohohohohoh' }
       before { get "/auth/person/#{user}" }
 
       it 'returns error' do
@@ -52,10 +52,10 @@ RSpec.describe 'Authentications', type: :request do
     end
   end
 
-  #get vaildates TorreWrap valid user public_id existance
+  # get vaildates TorreWrap valid user public_id existance
   describe 'GET /auth/wrapuser/:id' do
     let!(:user) { create(:user, public_id: 'canriquez') }
-    let!(:user_id) {user.public_id}
+    let!(:user_id) { user.public_id }
     context 'When request is valid' do
       before { get "/auth/wrapuser/#{user_id}" }
 
@@ -66,7 +66,7 @@ RSpec.describe 'Authentications', type: :request do
     end
 
     context 'When request is invalid valid' do
-      let (:bad_user) {'hohohohohoh'}
+      let(:bad_user) { 'hohohohohoh' }
       before { get "/auth/wrapuser/#{bad_user}" }
 
       it 'returns error' do

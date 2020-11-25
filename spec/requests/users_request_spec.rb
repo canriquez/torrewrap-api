@@ -6,7 +6,10 @@ RSpec.describe 'Users', type: :request do
     let!(:user) { create(:user) }
     let!(:user_password) { user.password }
 
-    let!(:valid_signup) { attributes_for(:user, public_id: 'canriquez', name: 'Carlos', password_confirmation: user_password) }
+    let!(:valid_signup) do
+      attributes_for(:user, public_id: 'canriquez',
+                            name: 'Carlos', password_confirmation: user_password)
+    end
     let!(:invalid_signup) { attributes_for(:user, password: '') }
 
     context 'when valid request' do
@@ -30,7 +33,7 @@ RSpec.describe 'Users', type: :request do
 
       it 'returns error response' do
         p json
-        expect(json['error']).to eq("User already exists torreWrap. Please login instead.")
+        expect(json['error']).to eq('User already exists torreWrap. Please login instead.')
       end
 
       it 'returns success' do
