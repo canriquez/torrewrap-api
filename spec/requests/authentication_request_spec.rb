@@ -53,11 +53,11 @@ RSpec.describe 'Authentications', type: :request do
   end
 
   #get vaildates TorreWrap valid user public_id existance
-  describe 'GET /auth/warapuser/:id' do
+  describe 'GET /auth/wrapuser/:id' do
     let!(:user) { create(:user, public_id: 'canriquez') }
     let!(:user_id) {user.public_id}
     context 'When request is valid' do
-      before { get "/auth/warapuser/#{user_id}" }
+      before { get "/auth/wrapuser/#{user_id}" }
 
       it 'returns confirmation' do
         p json
@@ -67,7 +67,7 @@ RSpec.describe 'Authentications', type: :request do
 
     context 'When request is invalid valid' do
       let (:bad_user) {'hohohohohoh'}
-      before { get "/auth/warapuser/#{bad_user}" }
+      before { get "/auth/wrapuser/#{bad_user}" }
 
       it 'returns error' do
         p json
