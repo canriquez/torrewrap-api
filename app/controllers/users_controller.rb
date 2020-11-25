@@ -1,3 +1,4 @@
+require 'json'
 class UsersController < ApplicationController
   before_action :none_existing_only, only: :create
 
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
       user = User.new(user_params)
       user.picture_thumbnail = JSON.parse(@torreco.body)["person"]["pictureThumbnail"]
       user.name = JSON.parse(@torreco.body)["person"]["name"]
-      user.json_response = JSON.parse(@torreco.body)["person"]
+      user.json_response = JSON.parse(@torreco.body)["person"].to_json
       user.save
       if user.valid?
         json_response({ 
