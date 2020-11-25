@@ -5,11 +5,8 @@ RSpec.describe "Users", type: :request do
     #Signup Action testing
     describe 'POST /signup' do
 
-        let!(:user) {create(:user)}
-        let!(:user_password) {user.password}
-
-        let!(:valid_signup) {attributes_for(:user, name: 'Pepe', password_confirmation: user_password)}
-        let!(:invalid_signup) {attributes_for(:user, password: '')}
+        let!(:valid_signup) {attributes_for(:user, public_id: 'canriquez', password: '12345', password_confirmation: '12345')}
+        let!(:invalid_signup) {attributes_for(:user, public_id: 'heheheh', password: '')}
 
         context 'when valid request' do
             before { post '/signup', params: valid_signup}
@@ -19,7 +16,8 @@ RSpec.describe "Users", type: :request do
             end
 
             it 'returns success' do
-                expect(json['user_id']).not_to be_nil
+              p json
+              expect(json['user_id']).not_to be_nil
             end
 
         end
@@ -33,7 +31,7 @@ RSpec.describe "Users", type: :request do
 
             it 'returns error response' do
                 p json
-                expect(json['message']).to eq("Signup error")
+                expect(json['message']).to eq("Person not found! in Torre.co. Please use a valid username.")
             end
 
             it 'returns success' do
