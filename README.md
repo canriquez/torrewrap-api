@@ -1,8 +1,8 @@
-# my-team-api | API Documentation
+# torrewrap-api | API Documentation
 
 ## Project description
 
-This API serves as a backend for the full-stack take-home project, 'torreWrap'. This repository contains the backend portion of the mentioned project. To get access to the frontend portion, please follow [this link](https://github.com/canriquez/my-team-api).
+This API serves as a backend for the full-stack take-home project, 'torreWrap'. This repository contains the backend portion of the mentioned project. To get access to the frontend portion, please follow [this link](https://github.com/canriquez/torrewrap).
 
 ### Full stack application concept
 
@@ -12,7 +12,7 @@ This API, serves as pass through to consume Torre.co endpoints. Also, this API p
 
 ### Live demo @Heroku
 
-[anriquez-my-team-api.herokuapp.com](https://torrewrap-api.herokuapp.com)
+[torrewrap-api.herokuapp.com](https://torrewrap-api.herokuapp.com)
 
 ### Database Entity Relation Diagram (ERD)
 
