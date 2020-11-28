@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   # POST /signup
   def create
     p user_params
+    #Checks Torreco response for user profile
     @torreco = Torreco::Search.by_public_id(user_params[:public_id])
     p JSON.parse(@torreco.body)
 
