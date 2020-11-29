@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2020_11_28_205324) do
 
   create_table "assets", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "type"
+    t.string "asset_type"
     t.string "cloud_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
