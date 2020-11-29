@@ -2,7 +2,10 @@ module Cloud
     def uploadImageToCloudinary(image,user)
         Cloudinary::Uploader.upload(image,
             :folder => (user.id).to_s,
-            :public_id => (user.id).to_s+'-profile_image-draft')["url"]
+            :public_id => (user.id).to_s+'-profile_image-draft',
+            :eager => [
+                {:width => 100, :height => 100, :crop => :thumb}]
+            )["url"]
     end
 
     def uploadVideoToCloudinary(video, user)
