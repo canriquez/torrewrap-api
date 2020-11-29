@@ -10,6 +10,7 @@ class UsersController < ApplicationController
                       picture_thumbnail: @user.picture_thumbnail,
                       public_id: @user.public_id,
                       torre_data: @user.json_response,
+                      cloud_url: @user.video_url,
                       created_at: @user.created_at,
                       updated_at: @user.updated_at
                     })

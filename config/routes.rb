@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post 'auth/login', to: 'users#login'
   post 'signup', to: 'users#create'
   post 'asset_upload', to: 'assets#asset_upload'
+  post 'asset_save', to: 'assets#asset_save'
 
   get 'auth/person/:id', to: 'authentication#person_check'
   get 'auth/wrapuser/:id', to: 'authentication#valid_wrap_user_check'
