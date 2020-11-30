@@ -22,7 +22,7 @@ class AssetsController < ApplicationController
         @asset.save
         p @asset.errors.messages
         if @asset.valid? 
-            update_user_profile_asset
+            #update_user_profile_asset
             json_response ({
                 message: 'Asset stored successfully.',
                 asset: @asset
@@ -39,14 +39,14 @@ class AssetsController < ApplicationController
     def asset_save
         if save_params[:asset_type] == 'image'
             url = saveImageToCloudinary(@user)
-            @user.update(picture_thumbnail: save_params[:cloud_url])
+            @user.update(picture_thumbnail: url)
             response = {
                 message: 'Asset stored successfully.',
                 picture_thumbnail: @user.picture_thumbnail
             }
         elsif save_params[:asset_type] == 'video'
             url = saveVideoToCloudinary(@user)
-            @user.update(video_url:save_params[:cloud_url])
+            @user.update(video_url:url)
             response = {
                 message: 'Asset stored successfully.',
                 video_url: @user.video_url
@@ -57,7 +57,6 @@ class AssetsController < ApplicationController
             }
         end
         json_response(response)
-
     end
 
 

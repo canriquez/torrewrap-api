@@ -44,7 +44,6 @@ RSpec.describe "Assets", type: :request do
 
         let!(:valid_upload_image_request) do 
             {
-                cloud_url: img_url,
                 user: user_id,
                 auth: user_id,
                 asset_type: 'image',
@@ -52,7 +51,6 @@ RSpec.describe "Assets", type: :request do
         end
         let!(:valid_upload_video_request) do 
             {
-                cloud_url: video_url,
                 user: user_id,
                 auth: user_id,
                 asset_type: 'video',
@@ -65,7 +63,7 @@ RSpec.describe "Assets", type: :request do
             it 'Updates user record with new cloud_url for image asset' do
                 p json
                 expect(json['message']).to eq('Asset stored successfully.')
-                expect(json['picture_thumbnail']).to eq(img_url)
+                expect(json['picture_thumbnail']).not_to be(nil)
             end
         end
         context 'when valid video request' do
@@ -74,7 +72,7 @@ RSpec.describe "Assets", type: :request do
             it 'Updates user record with new cloud_url for video asset' do
                 p json
                 expect(json['message']).to eq('Asset stored successfully.')
-                expect(json['video_url']).to eq(video_url)
+                expect(json['video_url']).not_to be(nil)
             end
         end
     end
