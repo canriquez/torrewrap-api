@@ -8,6 +8,7 @@ class UsersController < ApplicationController
                       user_id: @user.id,
                       user_name: @user.name,
                       picture_thumbnail: @user.picture_thumbnail,
+                      video_url: @user.video_url,
                       public_id: @user.public_id,
                       torre_data: @user.json_response,
                       created_at: @user.created_at,
@@ -21,6 +22,7 @@ class UsersController < ApplicationController
   # POST /signup
   def create
     p user_params
+    #Checks Torreco response for user profile
     @torreco = Torreco::Search.by_public_id(user_params[:public_id])
     p JSON.parse(@torreco.body)
 
@@ -33,9 +35,11 @@ class UsersController < ApplicationController
       user.json_response = JSON.parse(@torreco.body)['person'].to_json
       user.save
       if user.valid?
-        json_response({user_id: user.id,
+        json_response({
+                        user_id: user.id,
                         user_name: user.name,
                         picture_thumbnail: user.picture_thumbnail,
+                        video_url: user.video_url,
                         public_id: user.public_id,
                         torre_data: user.json_response,
                         created_at: user.created_at,
