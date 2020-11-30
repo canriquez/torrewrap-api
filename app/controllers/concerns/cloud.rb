@@ -4,7 +4,7 @@ module Cloud
             :folder => (user.id).to_s,
             :public_id => (user.id).to_s+'-profile_image-draft',
             :eager => [
-                {:width => 100, :height => 100, :crop => :thumb}]
+                {:width => 200, :height => 200, :auto => :face}]
             )["url"]
     end
 
@@ -25,9 +25,9 @@ module Cloud
 
     def saveVideoToCloudinary(user)
         Cloudinary::Uploader.destroy((user.id).to_s+'/'+(user.id).to_s+'-profile_video-final', 
-            options={:resource_type => :image})
+            options={:resource_type => :video})
         Cloudinary::Uploader.rename((user.id).to_s+'/'+(user.id).to_s+'-profile_video-draft',
             (user.id).to_s+'/'+(user.id).to_s+'-profile_video-final', 
-            options={:resource_type => :image, :overwrite => true})["url"]
+            options={:resource_type => :video, :overwrite => true})["url"]
     end
 end

@@ -8,9 +8,9 @@ class UsersController < ApplicationController
                       user_id: @user.id,
                       user_name: @user.name,
                       picture_thumbnail: @user.picture_thumbnail,
+                      video_url: @user.video_url,
                       public_id: @user.public_id,
                       torre_data: @user.json_response,
-                      cloud_url: @user.video_url,
                       created_at: @user.created_at,
                       updated_at: @user.updated_at
                     })
@@ -35,9 +35,11 @@ class UsersController < ApplicationController
       user.json_response = JSON.parse(@torreco.body)['person'].to_json
       user.save
       if user.valid?
-        json_response({user_id: user.id,
+        json_response({
+                        user_id: user.id,
                         user_name: user.name,
                         picture_thumbnail: user.picture_thumbnail,
+                        video_url: user.video_url,
                         public_id: user.public_id,
                         torre_data: user.json_response,
                         created_at: user.created_at,

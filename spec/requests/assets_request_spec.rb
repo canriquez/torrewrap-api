@@ -49,30 +49,61 @@ RSpec.describe "Assets", type: :request do
                 asset_type: 'image',
             }
         end
-        let!(:valid_upload_video_request) do 
-            {
-                user: user_id,
-                auth: user_id,
-                asset_type: 'video',
-            }
-        end
+
         context 'when valid image request' do
             before {post '/asset_upload', params: valid_upload_request}
             before {post '/asset_save', params: valid_upload_image_request}
 
             it 'Updates user record with new cloud_url for image asset' do
                 p json
-                expect(json['message']).to eq('Asset stored successfully.')
+                expect(json['message']).to eq('Asset saved successfully.')
                 expect(json['picture_thumbnail']).not_to be(nil)
             end
         end
-        context 'when valid video request' do
-            before {post '/asset_save', params: valid_upload_video_request}
+    end
 
-            it 'Updates user record with new cloud_url for video asset' do
+    # Post delets the asset image into using default urls
+    describe 'POST /asset_delete' do
+        let!(:user) {create(:user)}
+        let!(:user_id) {user.id}
+
+
+        let!(:valid_delete_video_request) do 
+            {
+                user: user_id,
+                auth: user_id,
+                asset_type: 'video',
+                cloud_url:'http://dummy'
+            }
+        end
+        context 'when valid image request' do
+            before {post '/asset_delete', params: valid_delete_video_request}
+
+            it 'Updates user record with new cloud_url for image asset' do
                 p json
-                expect(json['message']).to eq('Asset stored successfully.')
-                expect(json['video_url']).not_to be(nil)
+                expect(json['message']).to eq('Asset deleted successfully.')
+                expect(json['video_url']).to eq('http://dummy')
+            end
+        end
+    end
+
+    describe 'GET /refresh' do
+        let!(:user) {create(:user)}
+        let!(:user_id) {user.id}
+
+
+        let!(:valid_request) do 
+            {
+                user: user_id,
+                auth: user_id,
+            }
+        end
+        context 'when valid image request' do
+            before {get '/refresh', params: valid_request}
+
+            it 'Updates user record with new cloud_url for image asset' do
+                p json
+                expect(json['user_id']).to eq(user_id)
             end
         end
     end
